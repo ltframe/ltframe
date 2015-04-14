@@ -1,0 +1,598 @@
+@charset "utf-8";
+/* CSS Document */
+
+/***********************CSS RESET*********************/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,   
+form,fieldset,input,textarea,p,blockquote,th,td {   
+    padding: 0;   
+    margin: 0;   
+}   
+table {   
+    border-collapse: collapse;   
+    border-spacing: 0;   
+}   
+fieldset,img {   
+    border: 0;   
+}   
+address,caption,cite,code,dfn,em,strong,th,var {   
+    font-weight: normal;   
+    font-style: normal;   
+}   
+ol,ul {   
+    list-style: none;   
+}   
+caption,th {   
+    text-align: left;   
+}   
+h1,h2,h3,h4,h5,h6 {   
+    font-weight: normal;   
+    font-size: 100%;   
+}   
+q:before,q:after {   
+    content:'';   
+}   
+abbr,acronym { border: 0;   
+}  
+/***********************CSS OVERRIDE*********************/
+html { overflow-x: hidden; overflow-y: hidden; }
+body{
+	background:black;
+	background-position:top center;
+    font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:12px;
+	-webkit-touch-callout: none;-webkit-user-select: none;
+}
+img{-webkit-user-drag:none}
+.zoomOut{
+	-webkit-transform:scale(0.6);
+	-moz-transform:scale(0.6);
+	-webkit-transition:0.3s ease-in-out;
+	-moz-transition:0.3s ease-in-out;
+	behavior: url(ie-css3.htc);
+}
+	
+.zoomIn{
+	-webkit-transform:scale(1);
+	-moz-transform:scale(1);
+	behavior: url(ie-css3.htc);
+	
+}
+/**Framework
+***********************************************/
+
+#ipad{
+	background:url(../images/ipad.png);
+	width:864px;
+	height:660px;
+}
+
+
+.container{
+	background:#FFF;
+	margin:0 auto;
+	width:100%;
+	height:600px;
+}
+
+#screen{
+	position:relative;
+	background:url(../images/shuidi.jpg);
+	width:714px;
+	height:522px;
+	overflow:hidden;
+}
+
+#homeBtn{
+	position:absolute;
+	left:877px;
+	top:313px;
+	width:40px;
+	height:40px;
+	cursor:pointer;
+}
+
+/** header
+***********************************************/
+
+.header{
+	background-image:url(../images/topbar.png);
+	width:100%;
+	height:17px;	
+}
+
+
+/** icon
+***********************************************/
+.iconSet{
+	margin:0 auto;
+	padding:2% 2%;
+	width:100%;
+	height:96%;
+	text-align:center;
+}
+
+.icon{
+	float:left;
+	margin:14px 45px;
+	cursor:pointer;
+	
+}
+
+.icon img{
+	width:45px;
+	height:45px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.597656) 3px 7px 20px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.597656) 3px 7px 20px;
+	box-shadow: rgba(0, 0, 0, 0.597656) 3px 7px 25px;
+	-webkit-border-radius:9px 9px;
+	-moz-border-radius:9px 9px;
+	border-radius:9px 9px;
+	behavior: url(ie-css3.htc);
+}
+
+.iconName{
+	display:block;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+	font-weight:bold;
+	font-size:11px;
+	line-height:15px;
+	margin:5px auto 0;
+}
+
+/**MultiTasking for iPad
+***********************************************/
+#multiTask{
+	background:url(../images/pack.jpg);
+	float:left;
+	width:120%;
+	height:90px;
+	margin:0px -15px 0;
+	border:1px solid #CCC;
+}
+
+/*****************dock******************/
+
+#dock{
+	background:url(../images/dock.png);
+	float:left;
+	width:120%;
+	height:60px;
+	margin:151px -15px 0;
+}
+
+#dockSet{
+	width:75%;
+	margin:0 auto;
+}
+
+#dockSet>.dockIcon{
+	float:left;
+	margin:-14px 45px;
+	cursor:pointer;
+}
+
+
+.dockIcon img{
+	width:45px;
+	height:55px;
+}
+
+#dockSet>.dockIcon{
+	float:left;
+	margin:-14px 40px;
+	cursor:pointer;
+}
+
+.dockIcon>.iconName{
+	margin:-8px auto 0;
+}
+
+/**Folder for iPad
+***********************************************/
+
+.slide{
+	float:left;
+	width:120%;
+	padding:2% 0%;
+	height:100px;
+	display:none;
+	margin:-40px -50px 15px;
+}
+
+.pack{
+	float:left;
+	width:100%;
+	padding:2% 0%;
+	height:90px;
+	background:url(../images/pack.jpg);
+	border:2px solid #CCC;
+}
+
+.pack>.icon{
+	position:relative;
+	left:-173px;
+	margin:25px 45px;
+}
+
+#point{
+	width:25px;
+	height:12px;
+	position:relative;
+	left:242px;
+	top:5px;
+}
+
+#folderName{
+	float:left;
+	margin:-10px 85px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:18px;
+	color:#FFF;
+	
+}
+
+
+
+/*****************Photo******************/
+#black{
+	position:relative;
+	background:#000;
+	width:714px;
+	height:522px;
+	overflow:scroll;
+}
+
+
+	
+#bar{
+	background:url(../images/bar1.png);
+	border:1px solid #666;
+	width:100%;
+	height:30px;
+}
+
+#barbutton{
+	background:url(../images/barBtn.png);
+	border:1px solid #666;
+	width:200px;
+	height:20px;
+	margin:2px auto;
+	cursor:pointer;
+}
+
+.backBtn{
+	float:left;
+	background:url(../images/back.png);
+	height:20px;
+	width:38px;
+	cursor:pointer;
+	line-height:20px;
+	text-align:center;
+	color:#FFF;
+	font-size:10px;
+	margin:5px;
+}
+
+.editBtn{
+	float:right;
+	background:url(../images/edit.png);
+	height:30px;
+	width:50px;
+	cursor:pointer;
+	line-height:20px;
+	text-align:center;
+	color:#FFF;
+	font-size:10px;
+	margin:0 25px;
+}
+
+.editList{
+	position:absolute;
+	right:0;
+	top:40px;
+	background:url(../images/editList.png);
+	height:410px;
+	width:364px;
+	line-height:20px;
+	text-align:center;
+	color:#FFF;
+	z-index:90;
+	display:none;
+}
+
+
+div#album{
+	background-color:#666
+	border: none;
+	width:95%;
+	margin:10px auto;
+}
+
+img.image{
+	background-color:#FFF;
+	margin:30px;
+	padding:3px;
+	width:150px;
+	height:110px;
+	display:inline;
+	-webkit-box-shadow: 5px 5px 4px rgba(0,0, 0, 0.3);
+	-moz-box-shadow: 5px 5px 5px rgba(0,0, 0, 0.3);
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	behavior: url(ie-css3.htc);
+}
+
+img.amplifier{
+	display:block;
+	background-color:#FFF;
+	padding:8px;
+	width:580px;
+	height:410px;
+	margin:15px auto;
+}
+
+img.image:nth-of-type(1n){
+	-moz-transform: scale(1) rotate(-11deg);
+    -webkit-transform: scale(1) rotate(-11deg);
+}
+
+img.image:nth-of-type(2n){
+	-moz-transform: scale(1) rotate(16deg);
+    -webkit-transform: scale(1) rotate(16deg);
+}
+
+img.image:nth-of-type(3n){
+	-moz-transform: scale(1) rotate(4deg);
+    -webkit-transform: scale(1) rotate(4deg);
+}
+
+img.image:nth-of-type(4n){
+	-moz-transform: scale(1) rotate(6deg);
+    -webkit-transform: scale(1) rotate(6deg);
+}
+
+img.image:nth-of-type(5n){
+	-moz-transform: scale(1) rotate(-12deg);
+    -webkit-transform: scale(1) rotate(-12deg);
+}
+
+img.image:nth-of-type(6n){
+	-moz-transform: scale(1) rotate(-13deg);
+    -webkit-transform: scale(1) rotate(-13deg);
+}
+
+img.image:nth-of-type(7n){
+	-moz-transform: scale(1) rotate(9deg) ;
+    -webkit-transform: scale(1) rotate(9deg);
+}
+
+img.image:hover{
+    -moz-transform: scale(1.2) rotate(0deg) rotateY(180deg);
+    -webkit-transform: scale(1.2) rotate(0deg) rotateY(180deg);
+	-o-transform: scale(1.2) rotate(0deg) rotateY(180deg);
+	
+	-webkit-box-shadow: 15px 15px 4px rgba(0,0, 0, 0.3);
+	-moz-box-shadow: 15px 15px 4px rgba(0,0, 0, 0.3);
+	box-shadow: 15px 15px 4px rgba(0,0, 0, 0.3);
+	
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	
+	z-index:4;
+	cursor:pointer;
+}
+
+
+
+/*****************dialogue******************/
+.floatBox{
+	background:url(../images/dialogue.png);
+	width:286px;
+	height:138px;
+	display:none;
+	position:absolute;
+	z-index:98;
+}
+
+.Info{
+	width:95%;
+	height:70px;
+	margin:5px auto 0;
+}
+
+.BtnSet{
+	width:98%;
+	height:50px;
+	margin:0px auto;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	 background-color: transparent;
+				padding: 0;  
+				border: 0;
+				cursor:pointer;
+                }
+.ok,.cancel{
+	width:128px;
+	height:43px;
+	border:none;
+	color:#FFF;
+	margin:5px;
+}
+
+.ok{
+	background-image:url(../images/ok.png);
+}
+.cancel{
+	background-image:url(../images/cancel.png);
+}
+
+.ok:active{
+	background-image:url(../images/ok1.png);
+}
+.cancel:active{
+	background-image:url(../images/cancel1.png);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**iphone
+***********************************************/
+#iphone{
+	background:url(../../images/iphone.jpg);
+	margin:50px auto;
+	width:242px;
+	height:510px;
+}
+
+#screen1{
+	position:relative;
+	background:url(../../images/shuidi.jpg);
+	left:18px;
+	top:84px;
+	width:208px;
+	height:306px;
+	overflow:hidden;
+}
+
+
+/** icon
+***********************************************/
+.header1{
+	background-image:url(../../images/leaf_top.png);
+	width:100%;
+	height:10px;	
+}
+
+.iconSet1{
+	margin:0 auto;
+	padding:2% 1%;
+	width:100%;
+	height:98%;
+	text-align:center;
+}
+
+#title1{
+	float:left;
+	color:#FFF;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:9px;
+	font-weight:bolder;
+	margin:0 2px;
+	line-height:10px;
+}
+
+#time1{
+	float:left;
+	color:#FFF;
+	font-family:"Arial Black", Gadget, sans-serif;
+	font-weight:normal;
+	font-size:9px;
+	width:70px;
+	margin:0 285px;
+	line-height:10px;
+	display:block;
+	opacity:0.9;
+}
+
+.icon1{
+	float:left;
+	margin:3px 7px;
+	cursor:pointer;
+}
+
+.icon1 img{
+	width:36px;
+	height:45px;
+}
+
+.iconName1{
+	display:block;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+	font-weight:bold;
+	font-size:9px;
+	margin:-5px 0 0;
+}
+
+
+/**Folder for Iphone
+***********************************************/
+
+.slide1{
+	float:left;
+	width:120%;
+	margin:-21px -5px 20px;
+	height:80px;
+	display:none;
+
+}
+
+.pack1{
+	float:left;
+	width:100%;
+	height:80px;
+	background:url(../../images/pack.jpg);
+	border:1px solid #CCC;
+}
+
+.pack1>.icon1{
+	position:relative;
+	left:-64px;
+	margin:25px 7px;
+}
+
+#point1{
+	width:25px;
+	height:16px;
+	position:relative;
+	top:8px;
+	left:118px;
+}
+
+#folderName1{
+	float:left;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bolder;
+	color:#FFF;
+	margin:3px 14px -3px;
+	
+}

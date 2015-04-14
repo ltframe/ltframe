@@ -1,0 +1,73 @@
+**********************************************************************
+                       Release Notes for 
+
+              Windows Media Player HTML5 Extension for Chrome
+
+                    	  Jannuary 2011
+**********************************************************************
+The Windows Media Player HTML5 Extension for Chrome uses Windows Media 
+Player Firefox Plugin code from the April 2007 release. 
+The following notes applies to the Chrome extension as well.
+
+Information in this document, including URL and other Internet Web site
+references, is subject to change without notice and is provided for 
+informational purposes only. The entire risk of the use or results 
+of the use of this document remains with the user, and Microsoft 
+Corporation makes no warranties, either express or implied. Unless 
+otherwise noted, the example companies, organizations, products, 
+people and events depicted herein are fictitious and no association 
+with any real company, organization, product, person or event is 
+intended or should be inferred. Complying with all applicable copyright 
+laws is the responsibility of the user. Without limiting the rights under 
+copyright, no part of this document may be reproduced, stored in or 
+introduced into a retrieval system, or transmitted in any form or by 
+any means (electronic, mechanical, photocopying, recording, or otherwise), 
+or for any purpose, without the express written permission of 
+Microsoft Corporation.
+
+Microsoft may have patents, patent applications, trademarks, copyrights, 
+or other intellectual property rights covering subject matter in this 
+document. Except as expressly provided in any written license agreement 
+from Microsoft, the furnishing of this document does not give you any 
+license to these patents, trademarks, copyrights, or other intellectual 
+property.
+
+(c) 2007 Microsoft Corporation. All rights reserved.
+
+Microsoft, MS-DOS, Windows, Windows NT, Active Directory, ActiveX, 
+DirectShow, DirectSound, Hotmail, MSN, Outlook, PowerPoint, SideWinder, 
+Visual Basic, Visio, Visual C++, Visual FoxPro, Visual Studio, and 
+Windows Media are either registered trademarks or trademarks of 
+Microsoft Corporation in the United States and/or other countries.
+
+The names of actual companies and products mentioned herein may be 
+the trademarks of their respective owners.
+
+======================================================================
+POST INSTALLATION NOTES
+======================================================================
+
+
+1. WMP uses the IE browser proxy settings
+--------------------------------------------------
+If you have specific proxy settings in your browser, you will need to map
+these same settings through the IE proxy settings. This plugin will not 
+read any proxy settings cached in the Firefox browser.
+
+You can change the Proxy settings in IE through Tools, Internet Options, 
+Connections, LAN settings.
+
+
+2. Target attribute in <A HREF> tag will play media in new tab
+--------------------------------------------------
+Windows Media Player content that is linked to with an <A HREF> tag with a
+target attribute, will be played in a new tab within the browser. 
+
+
+3. VT_DATE Variant returns a string instead of a Date object
+--------------------------------------------------
+
+
+
+4. The Status bar is always displayed regardless of the ShowStatusBar value
+--------------------------------------------------

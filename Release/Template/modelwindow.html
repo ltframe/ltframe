@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+
+	</style>
+	<script type="text/javascript">
+
+	$(function(){ 
+		$(".windowclose").bind('mousedown',function() {
+				QuitApp();
+		});
+		$(document).mousedown(function(e){ 
+			if(e.which==3){
+				CreateMenu(e.screenX ,e.screenY,92,139);
+				return;
+			}
+		}); 
+	}); 
+
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-模态窗口</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+<div id="textcontent">
+在窗口内任意位置点击右键,将创建模态窗口
+</div>		
+</body>
+</html>

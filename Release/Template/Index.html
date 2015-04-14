@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	#div1 {width:650px;height:200px;padding:10px;border:1px solid #aaaaaa;}
+	img{-webkit-user-drag:none}
+	a{-webkit-user-drag:none}
+	ul{line-height: 33px;}
+	.d1{width: 300px;float: left;}
+	.logo{left: 20px;position: relative;}
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		$("li").each(function(i){	   	 
+	   	  $(this).bind('dblclick',function(){
+	   	  	  if(i==0){OpenSubWindow(); }
+	   	  	  if(i==1){OpenApplaction('Canvas.exe');}
+	   	  	  if(i==2){OpenApplaction('MemoryManager.exe');}
+	   	  	  if(i==3){OpenApplaction('plugin.exe');}
+	   	  	  if(i==5){OpenTransparentWindow('transparent');}
+	   	  	  if(i==6){OpenTransparentWindow('CanvasCube');}
+	   	  	  if(i==7){OpenTransparentWindow('doraemon');}
+	   	  	  if(i==8){OpenTransparentWindow('flash');}
+			  if(i==9){OpenTransparentWindow('google');}
+	   	  	  if(i==10){OpenApplaction('Localstorage.exe');}
+	   	  	  if(i==11){OpenApplaction('JavaScript.exe');}
+	   	  	  if(i==13){OpenApplaction('DragDrop.exe');}
+	   	  	  if(i==14){OpenApplaction('OLEDragDrop.exe');}
+	   	  	  if(i==15){OpenApplaction('ModelWindow.exe');}
+	   	  	  if(i==17){OpenApplaction('Ipad.exe');}
+	   	  	  if(i==18){OpenApplaction('Game.exe');}
+	   	  })
+		});
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		window.addEventListener('drop', function(ev){
+			ev.preventDefault();
+		}, false);
+	})
+
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+	<div class="logo"><img src="../images/logo_s.jpg"></div>
+	<div class="logo">双击链接打开测试程序</div>
+	<div class="d1">
+		<ul>
+			<li><a>子窗口创建与销毁</a></li>
+			<li><a>Canvas</a></li>
+			<li><a>内存管理</a></li>
+			<li><a>插件</a></li>
+			<li>透明窗口
+				<ul>
+					<li><a>HTML5时钟</a></li>
+					<li><a>立方体</a></li>
+					<li><a>多来A萌</a></li>	
+					<li><a>Flash</a></li>
+					<li><a>3D Google</a></li>							
+				</ul>
+			</li>
+		    
+		</ul>
+	</div>
+	<div class="d1">
+		<ul>
+			<li><a>本地存储</a></li>
+			<li><a>JavaScript</a></li>
+			<li>拖拽
+				<ul>
+					<li><a>HTML拖出</a></li>
+					<li><a>拖拽扩展</a></li>			
+				</ul>
+			</li>
+			<li><a>模态化窗口</a></li>
+			<li>综合实例(以下程序收集自网络)
+				<ul>
+					<li><a>IPAD界面</a></li>
+					<li><a>游戏</a></li>		
+				</ul>
+			</li>	
+		</ul>
+	</div>
+</body>
+</body>
+</html>

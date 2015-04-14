@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ipad</title>
+<script src="script/jquery-1.5.1.min.js"></script>
+<script src="script/scipt.js"></script>
+
+<link rel="stylesheet" href="css/style.css" />
+<style>
+iframe{width: 714px;height: 522px;top: 69px;border: 0;position: absolute;left: 76px;}
+  #home{margin-top: 246px;
+  margin-left: 810px;
+  float: left;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;}
+  #dragbar{  margin-left: 37px;width: 790px;height: 61px;cursor: pointer;float: left;margin-top: 6px;}
+</style>
+<script>
+$(function(){
+  $("#home").bind("click",function(){
+    $("#if").attr("src","iframe1.html");
+  });
+
+	});
+</script>
+</head>
+
+<body>
+<div id="dragbar"></div>  
+<div id="home"></div>
+<!--************************ipad start*******************************-->
+<div id="ipad">
+<div id="homeBtn" class="task"></div>
+<!--************************screen start*******************************-->
+        <iframe src="iframe1.html" scrolling="no" id="if"></iframe>
+<!--************************screen end*******************************-->   
+</div>
+<!--************************ipad end*******************************-->
+
+
+</body>
+
+
+
+

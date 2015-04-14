@@ -1,0 +1,101 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<script src="../javascript/jquery.cookie.js"></script>
+	<style>
+
+	.d1{height: 135px; left: 24px;position: relative;}
+	.d2{left: 24px;position: relative;}
+	.d3{left: 24px;position: relative;}
+	</style>
+	<script type="text/javascript">
+	
+	var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+	jQuery(document).ready(function($) {
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		$("#f1").bind("click", function(){
+			if($('#f1_text').val()=='')
+			{
+				alert('填入要设置的Cookie值');
+				return;
+			}
+		  	$("#_f1").removeAttr('disabled');
+		  	$.cookie('the_cookie', $("#f1_text").val(), {expires:7,path:'/'});
+		});
+		$("#f2").bind("click", function(){
+		 	$("#_f2").removeAttr('disabled');
+		 	localStorage.lastname=$("#f2_text").val();
+		});
+		$("#f3").bind("click", function(){
+			$("#_f3").removeAttr('disabled');	
+			$("#sqlstr").removeAttr('disabled');	
+			 
+			 db.transaction(function (tx) { 
+			   tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log)');  
+			   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "ABC")');  
+			   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "DEF")');   
+			 });  	 	
+		});
+		
+		$("#_f1").bind("click", function(){
+			$("#f1_span").text($.cookie('the_cookie'));
+		});
+		$("#_f2").bind("click", function(){
+		 	$("#f2_span").text(localStorage.lastname);
+		});
+		$("#_f3").bind("click", function(){
+		    var msg='';
+			db.transaction(function (tx) { 
+			   var sqlstr = $("#sqlstr").val();
+			   tx.executeSql(sqlstr, [], function (tx, results) { 
+			    var len = results.rows.length, i;  
+			    for (i = 0; i < len; i++){ 
+			      msg+= "第"+(i+1)+"行:id=" + results.rows.item(i).id + ";log="+results.rows.item(i).log;  
+			      
+			    } 
+			    $("#f3_span").text(msg)
+			  }, null);  
+			 });  	
+		});
+	});
+
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-本地存储</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+<div class="d1">
+			<p><h1>Cookie值:<span id="f1_span"></span> </h1></p>
+			<p>设置Cookie值:<input type="text" value="" id="f1_text"/></p>
+			<p>
+			   <input type="button" value="设置" id="f1"/>
+			   <input type="button" value="获取值" id="_f1" disabled="disabled"/>
+			</p>
+</div>	
+<div class="d2">    
+			<p><h1>Localstorage值:<span id="f2_span"></span> </h1></p>
+			   设置Localstorage值 :<input type="text" value="" id="f2_text"/></p>
+			<p>
+			   <input type="button" value="设置" id="f2"/>
+			   <input type="button" value="获取值" id="_f2" disabled="disabled"/>
+			</p>
+</div>	
+<div class="d3"> 		
+			<p><h1>WebSql值 :<span id="f3_span"></span> </h1></p>
+			<p>编辑SQL:<textarea id="sqlstr" cols="50" rows="3" disabled="disabled">SELECT * FROM LOGS</textarea></p>
+			<p>
+			   <input type="button" value="设置" id="f3"/>
+			   <input type="button" value="执行SQL" id="_f3" disabled="disabled"/>
+			</p>
+</div>			
+</body>
+</html>

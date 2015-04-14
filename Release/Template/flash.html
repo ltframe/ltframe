@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<style>
+	p{margin: 0}
+	</style>
+</head>
+<body>
+<p><input type="button" value="透明" onclick="" id="input1"><input type="button" value="不透明" id="input2"><input type="button" value="关闭" class="windowclose"  id="input2"></p>
+<div>
+	<embed width="300" height="400" name="plugin" wmode="transparent" src="../images/f28.swf" type="application/x-shockwave-flash">
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".windowclose").bind('mousedown',function(ev) {
+			
+			QuitApp();
+		});
+		$(document).bind('mousedown',function(ev) {
+			if(ev.target.id=='input1'){
+				SetLayerWindow(true);
+				return;
+			}
+			if(ev.target.id=='input2'){
+				SetLayerWindow(false);
+				return; 
+			}
+			DragWindow();
+		});
+	});
+</script>
+</body>
+</html>

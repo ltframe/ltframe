@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	div{float:left;}
+	iframe{height: 300px;width: 440px;border:0;}
+	ul{list-style: none;padding-left: 13px;}
+	li{line-height: 50px}
+	</style>
+	<script type="text/javascript">
+	function fun(){
+			var _isautogc =_cleanmemory =  false;
+			this.gc = function() {
+				garbageCollect();
+			};
+			this.isautogc = function(){
+				if(_isautogc){_isautogc=false;$("#f2").val('开启自动内存回收');}
+				else{ _isautogc =true;$("#f2").val('关闭自动内存回收');}
+				AutoGC(_isautogc);
+			};
+			this.cleanmemory =function(){
+				CleanMemory();
+			};
+	}
+	jQuery(document).ready(function($) {
+		var f = new fun();
+		$("#f1").bind("click", function(){
+		  	f.gc();
+		});
+		$("#f2").bind("click", function(){
+		 	f.isautogc();
+		});
+		$("#f3").bind("click", function(){
+		  f.cleanmemory();
+		});
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+	});
+	function start(){
+		$("input").each(function(index, val) {
+			 $(this).removeAttr('disabled');
+		});
+	    JobStart();
+	}
+	function showmemory(size)
+	{
+		$("#memorysize").text(size);
+	}
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-内存管理</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+<div><iframe src="Canvas.html"></iframe></div>
+
+<div>
+	<ul>
+		<li>当前内存使用:<a id="memorysize"></a>M</li>
+		<li><input type="button" value="内存回收" id="f1" disabled="disabled"></li>
+		<li><input type="button" value="开启自动内存回收" id="f2" disabled="disabled"></li>
+		<li><input type="button" value="清理内存" id="f3" disabled="disabled"></li>
+
+	</ul>
+</div>
+</body>
+</html>

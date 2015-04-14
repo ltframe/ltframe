@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+		<script src="../javascript/jquery.min.js"></script>
+	<style>
+ul{  width:90px;margin: 0px;position: absolute;line-height: 33px;list-style: none;padding-left:0px;}
+li{position: relative;  padding-left: 8px;cursor: pointer;}
+div{width: 90px;height: 137px;border: solid 1px #ABABAB;background: rgb(236, 236, 236);}
+	</style>
+	<script type="text/javascript">
+	  $(document).ready(function() {
+	  		$("li").mouseover(function(event) {
+	  			$(this).css({
+	  				'background-color':'rgb(119, 168, 212)'
+	  			});
+	  		});
+	  		$("li").mouseout(function(event) {
+	  			$(this).css({
+	  				'background-color':''
+	  			});
+	  		});
+	  		$("li").bind('click',function(){
+	  			ShowMenuClickMessage($(this).text());
+	  		})
+	  });
+	</script>
+</head>
+<body>
+<div>
+	<ul>
+		<li>右键菜单一</li>
+		<li>右键菜单二</li>
+		<li>右键菜单三</li>
+		<li>右键菜单四</li>
+	</ul>
+</div>		
+</body>
+</html>

@@ -1,0 +1,186 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../style/css.css"/>
+    <script src="../javascript/jquery.min.js"></script>
+    <title>Canvas</title>
+    <style>
+        p{margin: 0}
+    canvas{
+        margin:0 auto;
+        display:block;
+    }
+    </style>
+    <script>
+        jQuery(document).ready(function($) {
+        $(".windowclose").bind('mousedown',function(ev) {           
+            QuitApp();
+        });
+        $(document).bind('mousedown',function(ev) {
+            if(ev.target.id=='input1'){
+                SetLayerWindow(true);
+                return;
+            }
+            if(ev.target.id=='input2'){
+                SetLayerWindow(false);
+                return; 
+            }
+            if(ev.target.id=='input3'){
+
+                return; 
+            }
+            DragWindow();
+        });
+    });
+
+    onload=function(){
+        var canvas = document.querySelector('canvas');
+        canvas.height = 400;
+        canvas.width = 400;
+        var context = canvas.getContext('2d');
+ 
+        context.translate(200,200);
+        var focus=2000;
+ 
+        var points = [
+            {x:-100,y:-100,z:-100},
+            {x:100,y:-100,z:-100},
+            {x:100,y:100,z:-100},
+            {x:-100,y:100,z:-100},
+ 
+            {x:-100,y:-100,z:100},
+            {x:100,y:-100,z:100},
+            {x:100,y:100,z:100},
+            {x:-100,y:100,z:100}
+        ];
+ 
+        var color=getColor();
+        //循环画正方体
+        setInterval(function(){
+            context.clearRect(-200,-200,400,400);
+            var points2d = [];
+            for(var i=0;i<points.length;i++){
+                var newxyz = rectarr([0,-1,-0.3],10*Math.PI/180,[points[i].x,points[i].y,points[i].z]);
+                points[i].x = newxyz[0];
+                points[i].y = newxyz[1];
+                points[i].z = newxyz[2];
+ 
+                var obj = change2d(newxyz[0],newxyz[1],newxyz[2],focus);
+                points2d.push(obj);
+            }
+            drawRect(context,points2d,color);
+ 
+        },40);
+    }
+    //获取随机颜色
+    function getColor(){
+        var color={};
+        color.r = [parseInt(255*Math.random()),true];
+        color.g = [parseInt(255*Math.random()),true];
+        color.b = [parseInt(255*Math.random()),true];
+        return color;
+    }
+    //改变随机颜色
+    function changeColor(color){
+        for(var i in color){
+            if(color[i][1]==true){
+                color[i][0] -=Math.floor(5*Math.random());
+                if(color[i][0]<=0){
+                    color[i][1]=false;
+                }
+            }else{
+                color[i][0] +=Math.floor(5*Math.random());
+                if(color[i][0]>=255){
+                    color[i][1]=true;
+                }
+            }
+        }
+        return color;
+    }
+ 
+    function change2d (x,y,z,focus){
+        var xy={};
+        var scales = focus/(focus+z);
+        xy.x = x*scales;
+        xy.y = y*scales;
+        return xy;
+    }
+    //画正方体
+    function drawRect(context,p2d,color){
+        
+        changeColor(color);
+        context.fillStyle='rgba('+color.r[0]+','+color.g[0]+','+color.b[0]+',0)';
+        context.beginPath();
+ 
+        for(var i=0;i<6;i++){
+            var arr=[];
+            if(i==0){arr=[0,1,2,3]}
+            else if(i==1){arr=[4,5,6,7]}
+            else if(i==2){arr=[0,1,5,4]}
+            else if(i==3){arr=[1,2,6,5]}
+            else if(i==4){arr=[2,3,7,6]}
+            else{arr=[0,3,7,4]};
+            
+            context.moveTo(p2d[arr[0]].x,p2d[arr[0]].y);
+            context.lineTo(p2d[arr[1]].x,p2d[arr[1]].y);
+            context.lineTo(p2d[arr[2]].x,p2d[arr[2]].y);
+            context.lineTo(p2d[arr[3]].x,p2d[arr[3]].y);        
+            context.fill();
+        }
+ 
+        context.closePath();
+        context.stroke();   
+    }
+ 
+    //1,旋转轴
+    //2,旋转度数
+    //3,旋转后的xyz值
+ 
+    function rectarr(xiangl,theta,xyzArr){
+ 
+        var sqrt = Math.sqrt(xiangl[0]*xiangl[0] + xiangl[1]*xiangl[1] + xiangl[2]*xiangl[2]);
+ 
+        var u = xiangl[0] / sqrt;
+        var v = xiangl[1] / sqrt;
+        var w = xiangl[2] / sqrt;
+ 
+        var newarr = [];
+        newarr[0] = [
+            Math.cos(theta) + (u*u) * (1-Math.cos(theta)),
+            u * v * (1 - Math.cos(theta)) + w * Math.sin(theta),
+            u * w * (1 - Math.cos(theta)) - v * Math.sin(theta),
+            0
+        ];
+        newarr[1] = [
+            u * v * (1 - Math.cos(theta)) - w * Math.sin(theta),
+            Math.cos(theta) + v * v * (1 - Math.cos(theta)),
+            w * v * (1 - Math.cos(theta)) + u * Math.sin(theta),
+            0
+        ];
+        newarr[2] = [
+            u * w * (1 - Math.cos(theta)) + v * Math.sin(theta),
+            v * w * (1 - Math.cos(theta)) - u * Math.sin(theta),
+            Math.cos(theta) + w * w * (1 - Math.cos(theta)),
+            0
+        ];
+        newarr[3] = [0,0,0,1];
+ 
+        //计算旋转后的值
+        var arr = [];
+        for(var i = 0;i<newarr.length;i++){
+            var val = 0;
+            for(var j=0;j<xyzArr.length;j++){
+                val += newarr[i][j] * xyzArr[j];
+            }
+            arr.push(val);
+        }
+        return arr;
+    }
+    </script>
+</head>
+<body>
+    <p><input type="button" value="透明" onclick="" id="input1"><input type="button" value="不透明" id="input2"><input type="button" value="关闭" class="windowclose"  id="input2"></p>
+    <canvas></canvas>
+</body>
+</html>

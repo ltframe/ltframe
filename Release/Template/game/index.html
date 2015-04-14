@@ -1,0 +1,55 @@
+﻿
+<!DOCTYPE html>
+<html>  
+  <head>  
+    <title>Canvasnoid</title>  
+  <script src="../../javascript/jquery.min.js"></script>
+  <script src="../../javascript/js.js"></script>
+    <script src="canvasnoid.js"></script>  
+    <style>  
+      html{overflow:hidden;}
+body{font-size:14px;-webkit-touch-callout: none;-webkit-user-select: none;margin: 0px;}
+a{cursor: pointer;  text-decoration: underline;}
+#windowbar{width: 100%;height: 30px;background-image:-webkit-linear-gradient(225deg,rgb(198, 218, 236),rgb(54, 128, 193));}
+#windowbar div{float: right;position: relative;top:8px;width: 23px;cursor: pointer;}
+.windowclose img{-webkit-transition:-webkit-transform 0.5s;}
+.windowclose img:hover{-webkit-transform:rotate(360deg);}
+span{color:rgb(195, 195, 195);top: 7px;position: relative;left: 18px;}
+ 
+    </style>  
+  </head>  
+  <body onload="main();">
+<div id="windowbar">
+  <span>LTFrame实例教程</span>
+  <div class="windowclose"><img src="../../images/close.png"></div>
+  <div id="minwindow"><img src="../../images/min.png"></div>
+</div>
+<div id="fb-root"></div>
+<script>
+ (function(d, s, id) 
+ {
+  var js
+  var fjs = d.getElementsByTagName(s)[0];
+  if(d.getElementById(id))
+   return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "";
+  fjs.parentNode.insertBefore(js, fjs);
+ }
+ (document, 'script', 'facebook-jssdk'));
+ $(function(){
+    $(".windowclose").bind('mousedown',function() {
+      QuitApp();
+    });
+  })
+</script> 
+<div style="left:0px"><canvas style="cursor:none;" id="canvas" width="640" height="480" onMouseDown="mouse_pressed=true;" onMouseUp="mouse_released=true;"></canvas></div>
+</body>  
+</html>  
+
+
+
+
+
+

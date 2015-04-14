@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	ul{line-height: 40px;list-style: none;}
+
+	</style>
+	<script type="text/javascript">
+	$(function(){		
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		$('input').each(function(index) {			
+			$(this).bind('click',function(i){
+					if(index==0){
+						f1();
+					}
+					if(index==1){
+						alert(f2());
+					}
+					if(index==2){
+						var k = f3();
+						alert('avalue:'+k.avalue+'|'+'bvalue:'+k.bvalue);
+					}
+					if(index==3){
+						f4(function(str){
+							alert(str);
+						})
+					}
+					if(index==4){
+						var o = {a:111,b:222};
+						f5(o);
+					}
+
+			});
+		});
+
+	})
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-Javascript</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+	 <div>
+	 		<ul>
+	 				<li>c++执行JS:<input type="button" value="测试"/></li>
+	 				<li>JS调用c++:<input type="button" value="测试"/></li>
+	 				<li>c++创建js对象:<input type="button" value="测试"/></li>
+	 				<li>C++执行JS回掉函数:<input type="button" value="测试"/></li>
+	 				<li>C++获取JS对象:<input type="button" value="测试"/></li>
+	 		</ul>
+	 </div>   
+</body>
+</html>

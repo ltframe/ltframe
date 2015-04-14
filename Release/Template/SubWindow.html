@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	#div1 {width:650px;height:200px;padding:10px;border:1px solid #aaaaaa;}
+	img{-webkit-user-drag:none}
+	a{-webkit-user-drag:none}
+	ul{line-height: 33px;}
+	.d1{width: 200px;float: left;}
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		$(".windowclose").bind('mousedown',function() {
+			CloseWindow();
+		});
+	})
+	
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-子窗口创建与销毁</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+</div>
+	<div><img src="../images/logo.jpg"></div>
+</body>
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/snowfall.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	*{margin:0; padding: 0;}
+	body{background: #333;}
+	.button {
+		-webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.15);
+		-moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.15);
+		box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.15);
+		background-color: #eeeeee;
+		background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbfbfb), color-stop(100%, #e1e1e1));
+		background: -webkit-linear-gradient(top, #fbfbfb, #e1e1e1);
+		background: -moz-linear-gradient(top, #fbfbfb, #e1e1e1);
+		background: -o-linear-gradient(top, #fbfbfb, #e1e1e1);
+		background: linear-gradient(top, #fbfbfb, #e1e1e1);
+		display: -moz-inline-stack;
+		display: inline-block;
+		vertical-align: middle;
+		zoom: 1;
+		border: 1px solid #d4d4d4;
+		height: 32px;
+		line-height: 32px;
+		padding: 0px 25.6px;
+		font-weight: 300;
+		font-size: 14px;
+		font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		color: #666666;
+		text-shadow: 0 1px 1px white;
+		margin: 0;
+		text-decoration: none;
+		text-align: center;
+	}
+	a{
+		cursor: pointer;
+		color: #00A1CB;
+	}
+	.button-pill {
+		-webkit-border-radius: 50px;
+		-moz-border-radius: 50px;
+		-ms-border-radius: 50px;
+		-o-border-radius: 50px;
+		border-radius: 50px;
+	}
+	.button-border-action {
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		-webkit-transition-property: all;
+		-moz-transition-property: all;
+		-o-transition-property: all;
+		transition-property: all;
+		-webkit-transition-duration: 0.3s;
+		-moz-transition-duration: 0.3s;
+		-o-transition-duration: 0.3s;
+		transition-duration: 0.3s;
+		color: #00a1cb;
+		border: 2px solid #00a1cb;
+		background: none;
+		text-shadow: none;
+	}
+	.button-border-action:hover {
+		background: none;
+		color: #00c9fe;
+		border: 2px solid #00c9fe;
+	}
+
+	</style>
+		<script type="text/javascript">
+	$(function(){
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		if (self != top) {  
+		     $("#windowbar").remove();
+		}
+	})
+	
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-Canvas</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+	<a id="start-snowFall" class="button button-border-action button-pill">开始</a>
+	<a id="stop-snowFall" class="button button-border-action button-pill">停止</a>
+	<a id="pause-snowFall" class="button button-border-action button-pill">暂停</a>
+	<a id="resume-snowFall" class="button button-border-action button-pill">恢复</a>
+</body>
+</html>

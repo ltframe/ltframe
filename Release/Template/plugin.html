@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		$(".windowclose").bind('mousedown',function() {
+				QuitApp();
+		});
+	});
+
+
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-插件</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+<div>
+	<embed height="100" width="400" type="application/x-mplayer2" width="550" height="400" autostart="true" loop="true"/><br>
+	使用插件方式调用Windows media player
+</div>		
+</body>
+</html>

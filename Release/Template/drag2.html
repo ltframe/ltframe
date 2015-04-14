@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	#div1 {width:300px;height:80px;padding:10px;border:1px solid #aaaaaa;}
+	</style>
+	<script type="text/javascript">
+	//location.href='http://www.w3cschool.cc/try/try.php?filename=tryhtml5_draganddrop'
+	jQuery(document).ready(function($) {
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		window.addEventListener('drop', function(ev){
+			ev.preventDefault();
+		}, false);
+	});
+
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-OLE拖动</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+	<div id="minwindow"><img src="../images/min.png"></div>
+</div>
+<div id="div1">OLE方式拖动文件<br>拖动文件到任意位置
+</div>
+
+</body>
+</body>
+</html>

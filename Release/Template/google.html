@@ -1,0 +1,569 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Google Cube</title>
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+<style>
+p{margin: 0}
+html
+{
+overflow: hidden;
+}
+.face
+{
+width: 100%;
+height: 100%;
+background: #FFF;
+text-align: center;
+}
+.face img
+{
+width: 100%;
+height: 25%;
+margin-top: 10%;
+}
+.face input
+{
+margin-top: 8%;
+width: 96%;
+height: 8%;
+border: #666 solid 1px;
+}
+.face button
+{
+margin-top: 8%;
+width: 75%;
+height: 15%;
+}
+</style>
+</head>
+<body style="background-color:rgba(255, 255, 255, 0);">
+	<p><input type="button" value="透明" onclick="" id="input1"><input type="button" value="不透明" id="input2"><input type="button" value="关闭" class="windowclose"  id="input2"></p>
+<!-- <script src="Cube1.6.1.js"></script> -->
+<script>
+	jQuery(document).ready(function($) {
+		$(".windowclose").bind('mousedown',function(ev) {
+			
+			QuitApp();
+		});
+		$(document).bind('mousedown',function(ev) {
+			if(ev.target.id=='input1'){
+				SetLayerWindow(true);
+				return;
+			}
+			if(ev.target.id=='input2'){
+				SetLayerWindow(false);
+				return; 
+			}
+			if(ev.target.id=='input3'){
+
+				return; 
+			}
+			DragWindow();
+		});
+	});
+/****************************************
+* HTMLÁ¢·½Ìå²å¼þ v1.6.1
+*   By EtherDream (c) 2006-2011
+* ×îºó¸üÐÂ: 2011.1.29
+**/
+var Cube;
+(function(){
+/*******************
+*     |+y
+*     |
+*     0----- +x
+*    /
+*   /+z
+******************/
+function Point(x, y, z)
+{
+this.update = function()
+{
+this.rx = x;
+this.ry = y;
+this.deepth = z; //ÎÞÏÞÔ¶
+};
+this.rotate = function(radX, radY, radZ)
+{
+var _x, _y, _z;
+var sin, cos;
+if(radX)
+{
+sin = Math.sin(radX);
+cos = Math.cos(radX);
+_y = cos * y - sin * z;
+_z = cos * z + sin * y;
+y = _y;
+z = _z;
+}
+if(radY)
+{
+sin = Math.sin(radY);
+cos = Math.cos(radY);
+_x = cos * x - sin * z;
+_z = cos * z + sin * x;
+x = _x;
+z = _z;
+}
+if(radZ)
+{
+sin = Math.sin(radZ);
+cos = Math.cos(radZ);
+_x = cos * x - sin * y;
+_y = cos * y + sin * x;
+x = _x;
+y = _y;
+}
+this.update();
+};
+this.update();
+}
+/*****************************
+*   p1--------p2
+*   |          |
+*   p3--------p4
+*****************************/
+function Face(P1, P2, P3, P4)
+{
+/***************************************************
+*    P(x,y) + [a,b,c,d,tx,ty]
+* => P(ax+by+tx, cx+dy+ty)
+***************************************************/
+this.getMatrix = function()
+{
+var tx = P1.rx;
+var ty = P1.ry;
+var a = (P2.rx - tx) / 2;
+var b = (ty - P2.ry) / 2;
+var c = (P3.rx - tx) / 2;
+var d = (ty - P3.ry) / 2;
+return [a, b, c, d, tx, ty];
+};
+this.getDeepth = function()
+{
+return P1.deepth + P4.deepth;
+};
+this.getBlockX = function()
+{
+return Math.min(P1.rx, P2.rx, P3.rx, P4.rx);
+};
+this.getBlockY = function()
+{
+return Math.max(P1.ry, P2.ry, P3.ry, P4.ry);
+};
+}
+Cube = function()
+{
+/*******************
+*    4-------5
+*   /|      /|
+*  0-------1 |
+*  | |     | |
+*  | 7- - -|-6
+*  |/      |/
+*  3-------2
+*******************/
+var R = 100;
+var P =
+[
+new Point(-1, +1, +1),
+new Point(+1, +1, +1),
+new Point(+1, -1, +1),
+new Point(-1, -1, +1),
+new Point(-1, +1, -1),
+new Point(+1, +1, -1),
+new Point(+1, -1, -1),
+new Point(-1, -1, -1)
+];
+var F =
+[
+new Face(P[0], P[1], P[3], P[2]), //Ç°
+new Face(P[1], P[5], P[2], P[6]), //ÓÒ
+new Face(P[5], P[4], P[6], P[7]), //ºó
+new Face(P[4], P[0], P[7], P[3]), //×ó
+new Face(P[4], P[5], P[0], P[1]), //ÉÏ
+new Face(P[3], P[2], P[7], P[6])  //ÏÂ
+];
+var cx, cy;
+var bLight;
+var arrInfo = [];
+var KEY_NAME;
+var ver = navigator.userAgent;
+var isIE = /MSIE/.test(ver);
+var isFF = /Firefox/.test(ver);
+var RAD = Math.PI / 180;
+/**
+* ³õÊ¼»¯
+*/
+function Init()
+{
+var FILTER_NAME = "DXImageTransform.Microsoft.Matrix";
+var div, sty, flt;
+for(var i=0; i<6; i++)
+{
+div = document.createElement("div");
+document.body.appendChild(div);
+sty = div.style;
+sty.position = "absolute";
+sty.background = "#000";
+sty.border = "#000 1px solid";
+if(isIE)
+{
+//IE Filter
+sty.filter = "progid:" + FILTER_NAME + "(sizingMethod='auto expand')";
+flt = div.filters[FILTER_NAME];
+}
+else
+{
+//CSS3 transform
+if(!KEY_NAME)
+{
+if(sty.MozTransform != null)   //FireFox
+KEY_NAME = "MozTransform";
+else if(sty.WebkitTransform != null) //Chrome,Safari
+KEY_NAME = "WebkitTransform";
+else if(sty.OTransform != null)   //Opera
+KEY_NAME = "OTransform";
+else
+throw new Error("ä¯ÀÀÆ÷²»Ö§³Ö");
+}
+//µ÷Õû²ÎÕÕµã
+sty[KEY_NAME + "Origin"] = "0% 0%";
+}
+arrInfo[i] = {div:div, sty:sty, flt:flt};
+}
+}
+function setLight(i, val)
+{
+var obj = arrInfo[i].fltElem;
+if(!obj)
+return;
+obj.opacity = isIE? val*100: val;
+}
+function apply(id, visible, opacity)
+{
+var info = arrInfo[id];
+var sty = info.sty;
+if(visible)
+sty.display = "block";
+else
+return sty.display = "none";
+var face = F[id];
+var m = face.getMatrix(R);
+//0.123456
+for(var i=0; i<6; i++)
+m[i] = ((m[i] * 1e6) >> 0) / 1e6;
+if(isIE)
+{
+//IE MatrixÂË¾µ
+var flt = info.flt;
+flt.M11 = m[0];
+flt.M21 = m[1];
+flt.M12 = m[2];
+flt.M22 = m[3];
+//flt.Dx = cx + R * m[4];
+//flt.Dy = cy - R * m[5];
+sty.pixelLeft = cx + R * face.getBlockX();
+sty.pixelTop = cy - R * face.getBlockY();
+}
+else
+{
+//CSS3
+m[4] = cx + R * m[4];
+m[5] = cy - R * m[5];
+if(isFF)
+{
+m[4] += "px";
+m[5] += "px";
+}
+sty[KEY_NAME] = "matrix(" + m.join(",") + ")";
+}
+}
+function draw()
+{
+var deepth = [];
+var z, i;
+// Éî¶ÈÅÅÐò
+for(i=0; i<6; i++)
+deepth[i] = {id:i, val:F[i].getDeepth()};
+deepth.sort(function(a,b){return b.val - a.val});
+//ÕýÃæ
+for(i=0; i<3; i++)
+{
+apply(deepth[i].id, true);
+if(bLight)
+{
+z = (deepth[i].val + 2) / 4;
+setLight(deepth[i].id, z*z);
+}
+}
+//ÒþÃæ
+for(i=3; i<6; i++)
+apply(deepth[i].id, false);
+}
+function updateSize(sty)
+{
+var D = Math.round(R+R);
+if(!isIE) //½â¾ö±ß¿ò·ÖÀë
+D-=2;
+sty.width = D + "px";
+sty.height = D + "px";
+}
+/**
+* setLocate:
+*   Ò³ÃæÖÐ¶¨Î»Á¢·½Ìå¡£
+*   (cx, cy)ÎªÁ¢·½ÌåÖÐÐÄµã×ø±ê
+*/
+this.setLocate = function(_cx, _cy)
+{
+cx = _cx;
+cy = _cy;
+draw();
+};
+/**
+* setFace:
+*   Á¢·½ÌåÌùÃæ¡£
+*   id: Á¢·½ÌåÃæ±àºÅ
+*   elem: Ò³ÃæÖÐµÄHTMLÔªËØ
+*/
+this.setFace = function(id, elem)
+{
+var faceInfo = arrInfo[id];
+if(!faceInfo)
+throw new Error("ÎÞÐ§µÄÃæID");
+try
+{
+if(faceInfo.elem)
+faceInfo.div.replaceChild(elem, faceInfo.elem);
+else
+faceInfo.div.appendChild(elem);
+//Í¸Ã÷¶È
+if(isIE)
+{
+elem.style.filter = "alpha";
+faceInfo.fltElem = elem.filters["alpha"];
+}
+else
+{
+faceInfo.fltElem = elem.style;
+}
+faceInfo.elem = elem;
+}
+catch(e)
+{
+throw new Error("ÎÞÐ§µÄDOMÔªËØ");
+}
+};
+/**
+* setRadius:
+*   ÉèÖÃÁ¢·½ÌåÃ¿¸öÃæµÄ°ë¾¶³¤¶È
+*/
+this.setRadius = function(r)
+{
+R = r;
+for(var i=0; i<6; i++)
+updateSize(arrInfo[i].sty);
+draw();
+};
+/**
+* rotate:
+*   Ðý×ªÁ¢·½Ìå¡£
+*   angleX: ÈÆXÖáÐý×ªangleX½Ç¶È
+*   ...
+*/
+this.rotate = function(angleX, angleY, angleZ)
+{
+for(var i=0; i<8; i++)
+P[i].rotate(RAD*angleX, RAD*angleY, RAD*angleZ);
+draw();
+};
+/**
+* setLight:
+*   ÉèÖÃÊÇ·ñ¿ªÆô¹âÁÁ
+*/
+this.setLight = function(v)
+{
+bLight = v;
+if(!v)
+for(var i=0; i<6; i++)
+setLight(i, 0);
+};
+Init();
+};
+Cube.FACE_FRONT = 0;
+Cube.FACE_RIGHT = 1;
+Cube.FACE_BACK = 2;
+Cube.FACE_LEFT = 3;
+Cube.FACE_TOP = 4;
+Cube.FACE_BOTTOM = 5;
+})() //End Module
+</script>
+<script>
+/**
+* Update: 2011-9-2
+*/
+var MyFace =
+[
+{
+id: Cube.FACE_FRONT,
+logo: "../images/google.gif",
+url: "http://www.google.com/search?q=%s",
+btn: "Search Web"
+},
+{
+id: Cube.FACE_BACK,
+logo: "../images/google.gif",
+url: "http://www.google.com/images?q=%s",
+btn: "Search Image"
+},
+{
+id: Cube.FACE_LEFT,
+logo: "../images/google.gif",
+url: "http://www.google.cn/music/search?q=%s",
+btn: "Search Music"
+},
+{
+id: Cube.FACE_BOTTOM,
+logo: "../images/google.gif",
+url: "http://maps.google.com/maps?q=%s",
+btn: "Search Maps"
+},
+{
+id: Cube.FACE_RIGHT,
+logo: "../images/google.gif",
+url: "http://news.google.com/news/search?q=%s",
+btn: "Search News"
+},
+{
+id: Cube.FACE_TOP,
+logo: "../images/google.gif",
+url: "http://video.google.com/search?q=%s",
+btn: "Search Video"
+}
+];
+</script>
+<script>
+var oCube;
+var cx, cy;
+var dx, dy;
+var r = 80;
+var ar = 0;
+document.onmousemove = function(e)
+{
+e = e || event
+dx = e.clientX - cx;
+dy = e.clientY - cy;
+};
+window.onresize = function()
+{
+var de = document.documentElement;
+cx = de.clientWidth / 2;
+cy = de.clientHeight / 2;
+oCube.setLocate(cx, cy);
+};
+document.onclick = function(e)
+{
+e = e || event;
+e = e.target || e.srcElement;
+if(e.tagName == "BUTTON")
+DoSearch(e);
+}
+document.onmouseover = function(e)
+{
+e = e || event;
+e = e.target || e.srcElement;
+if(e.tagName == "INPUT")
+e.style.borderColor = "red";
+}
+document.onmouseout = function(e)
+{
+e = e || event;
+e = e.target || e.srcElement;
+if(e.tagName == "INPUT")
+e.style.borderColor = "#666";
+}
+document.onkeydown = function(e)
+{
+e = e || event;
+var dom = e.target || e.srcElement;
+if(dom.tagName == "INPUT" && e.keyCode == 13)
+DoSearch(dom.nextSibling);
+}
+window.onload = function()
+{
+var i, oFace;
+oCube = new Cube();
+for(i=0; i<6; i++)
+{
+oFace = document.createElement("div");
+oFace.className = "face";
+oFace.innerHTML = "<img src='" + MyFace[i].logo + "' /><input type='text' /><button tid=" + i + ">" + MyFace[i].btn + "</button>";
+document.body.appendChild(oFace);
+oCube.setFace(MyFace[i].id, oFace);
+}
+oCube.setRadius(r);
+oCube.setLight(true);
+oCube.rotate(20, 20, 0);
+setInterval(OnTimer, 16);
+onresize();
+};
+var ver = navigator.userAgent;
+var isIE = /IE/.test(ver);
+var isFF = /Firefox/.test(ver);
+if(isFF)
+document.addEventListener("DOMMouseScroll", handleScroll, false);
+else
+document.onmousewheel = handleScroll;
+function handleScroll(e)
+{
+e = e || event;
+var d = isFF? -e.detail: e.wheelDelta;
+ar += (d<0?-10:10);
+if(ar > 100)
+ar = 100;
+else if(ar < -100)
+ar = -100;
+if(isIE)
+{
+e.returnValue = false;
+}
+else
+{
+e.preventDefault();
+e.stopPropagation();
+}
+}
+function OnTimer()
+{
+var aX = dy / 100;
+var aY = -dx / 100;
+if(aX || aY)
+oCube.rotate(aX, aY);
+if(ar < 0)
+ar++, r--;
+else if(ar > 0)
+ar--, r++;
+else
+return;
+if(r < 80)
+r = 80;
+else if(r > 200)
+r = 200;
+oCube.setRadius(r);
+}
+function DoSearch(btn)
+{
+var word = btn.previousSibling.value;
+var id = btn.getAttribute("tid");
+var url = MyFace[id].url.replace("%s", encodeURI(word));
+window.open(url);
+}
+
+</script>
+<div style="width:728px;margin:10px auto; overflow:hidden;">
+
+</div>
+</body>
+</html>

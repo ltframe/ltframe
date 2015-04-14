@@ -1,0 +1,21 @@
+{
+  "name" : "Windows Media Player Extension for HTML5",
+  "version" : "1.0",
+  "description" : "Enables video playback for MP4 and Media Player formats",
+  "homepage_url" : "http://www.interoperabilitybridges.com/wmp-extension-for-chrome",
+  "update_url": "http://www.interoperabilitybridges.com/ChromeWMP/wmpChromeupdates.xml",
+  "content_scripts" : [
+    {
+      "matches" : [
+        "<all_urls>"
+      ],
+      "js" : ["contentscript.js"],
+      "run_at" : "document_end",
+      "all_frames" : true
+    }
+  ],
+  "plugins": [
+    { "path": "np-mswmp.dll", "public": true }
+  ],
+  "icons": { "16": "wmp16.png", "48": "wmp48.png", "128": "wmp128.png" }
+}
