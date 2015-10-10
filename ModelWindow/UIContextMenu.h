@@ -10,7 +10,7 @@ public:
 	};
 	UIContextMenu(void);
 	~UIContextMenu(void);
-	WebView* ltskinview; 
+	LTFrameView* ltskinview; 
 	HWND GetWindowHandle();
 	void CreateContextMenu(HWND hwnd,int x,int y,int cx,int cy);	
 	int applactionclose;

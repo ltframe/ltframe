@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	#div1 {width:650px;height:200px;padding:10px;border:1px solid #aaaaaa;}
+	img{-webkit-user-drag:none}
+	a{-webkit-user-drag:none}
+	ul{line-height: 33px;}
+	.d1{width: 200px;float: left;}
+	.box{padding-left: 15px;padding-top: 10px;}
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		$("#baiduiframe").attr('src','https://www.baidu.com');
+		$("#baiduiframe").load(function() {
+			$("#inputtextset").removeAttr('disabled');
+			$("#inputtext").removeAttr('disabled');
+			$("#inputtextset").val('设置');
+		});
+
+		$("#inputtextset").bind('click',function(){
+			if($("#inputtext").val()==''){alert('输入要测试的内容');return;}
+			var k = document.getElementById('baiduiframe').contentWindow.document.getElementById('kw');
+			k.value = $("#inputtext").val();
+		});
+	})
+	
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-跨域修改iframe内容</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+</div>
+	<div class="box">
+		 <input type="text" id="inputtext"  disabled="disabled"><input type="button" disabled="disabled" value="iframe载入中......" id="inputtextset">
+	</div>
+	<div class="box">
+		 <iframe  width="650" height="350" id="baiduiframe" style="border: 0;" >
+	</div>
+	
+</body>
+</body>
+</html>

@@ -20,7 +20,7 @@ public:
 		delete this;
 	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 	map<HWND,SubWindow*> instancelist;
 };

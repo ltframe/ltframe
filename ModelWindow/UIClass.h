@@ -15,6 +15,6 @@ public:
 	void MinWindow();
 	void CreateMenu(int x,int y,int cx,int cy);
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 };

@@ -14,7 +14,10 @@ public:
 	void QuitApp();
 	void MinWindow();
 	void SetLayerWindow(bool type);
+	virtual void OnFinalMessage(){
+		delete this;
+	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 };

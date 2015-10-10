@@ -36,7 +36,7 @@ void UIContextMenu::CreateContextMenu(HWND hwnd,int x,int y,int cx,int cy)
 	OleInitialize(0);
 
 	UIContextMenuC = this;
-	ltskinview= CreateLTFrameInstance(this,L"UIContextMenu",hwnd,WS_POPUP,x,y,cx,cy,0);
+	ltskinview= new LTFrameView(this,L"UIContextMenu",hwnd,WS_POPUP,x,y,cx,cy,0);
 
 
 	SetWindowText(ltskinview->windowHandle(),L"LTFrame-ModelWindow");	
@@ -96,7 +96,7 @@ void UIContextMenu::CreateContextMenu(HWND hwnd,int x,int y,int cx,int cy)
 		}
 	}
 
-	ltskinview->ReleaseWindow();
+	ltskinview->CloseWindow();
 	
 
 }

@@ -15,7 +15,7 @@
 	</style>
 	<script type="text/javascript">
 	$(function(){
-		$("li").each(function(i){	   	 
+		$("li").each(function(i){		 
 	   	  $(this).bind('dblclick',function(){
 	   	  	  if(i==0){OpenSubWindow(); }
 	   	  	  if(i==1){OpenApplaction('Canvas.exe');}
@@ -30,9 +30,14 @@
 	   	  	  if(i==11){OpenApplaction('JavaScript.exe');}
 	   	  	  if(i==13){OpenApplaction('DragDrop.exe');}
 	   	  	  if(i==14){OpenApplaction('OLEDragDrop.exe');}
-	   	  	  if(i==15){OpenApplaction('ModelWindow.exe');}
-	   	  	  if(i==17){OpenApplaction('Ipad.exe');}
-	   	  	  if(i==18){OpenApplaction('Game.exe');}
+
+	   	  	  if(i==16){OpenCrossDomain('crossdomainiframe');}
+	   	  	  if(i==17){OpenCrossDomain('crossdomainajax');}
+
+	   	  	  if(i==18){OpenApplaction('ModelWindow.exe');}
+	   	  	  
+	   	  	  if(i==20){OpenApplaction('Ipad.exe');}
+	   	  	  if(i==21){OpenApplaction('Game.exe');}
 	   	  })
 		});
 		$(".windowclose").bind('mousedown',function() {
@@ -68,17 +73,22 @@
 					<li><a>3D Google</a></li>							
 				</ul>
 			</li>
-		    
+		    <li><a>本地存储</a></li>
 		</ul>
 	</div>
 	<div class="d1">
 		<ul>
-			<li><a>本地存储</a></li>
 			<li><a>JavaScript</a></li>
 			<li>拖拽
 				<ul>
 					<li><a>HTML拖出</a></li>
 					<li><a>拖拽扩展</a></li>			
+				</ul>
+			</li>
+			<li>跨域(谨慎使用)
+				<ul>
+					<li><a>跨域操作iframe</a></li>
+					<li><a>跨域ajax请求</a></li>		
 				</ul>
 			</li>
 			<li><a>模态化窗口</a></li>
@@ -87,7 +97,8 @@
 					<li><a>IPAD界面</a></li>
 					<li><a>游戏</a></li>		
 				</ul>
-			</li>	
+			</li>
+
 		</ul>
 	</div>
 </body>

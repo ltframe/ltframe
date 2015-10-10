@@ -17,8 +17,10 @@ public:
 	virtual bool  OnDrop(IDataObject* pDataObject, DWORD grfKeyState, POINTL pt, DWORD* pdwEffect);
 	virtual bool  OnDragLeave();	
 	virtual bool  OnDragEnter(IDataObject* pDataObject, DWORD grfKeyState, POINTL pt, DWORD* pdwEffect);
-
+	virtual void OnFinalMessage(){
+		delete this;
+	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 };

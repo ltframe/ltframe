@@ -16,8 +16,11 @@ public:
 	void JobStart();
 	void IsAutoGC(bool);
 	void CleanMemory();
+	virtual void OnFinalMessage(){
+		delete this;
+	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 	HANDLE hProcess;
 };

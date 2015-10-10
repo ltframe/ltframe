@@ -17,9 +17,11 @@ public:
 	void MinWindow();
 	void OpenNewApplaction(wchar_t*,wchar_t* params=0);
 	void OpenSubWindow();
-
+	virtual void OnFinalMessage(){
+		delete this;
+	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 	RECT CenterWindow(int w,int h);
 

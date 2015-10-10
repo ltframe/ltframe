@@ -15,7 +15,10 @@ public:
 	void MinWindow();
 	void f1();
 	void f5(LTExecState*);
+	virtual void OnFinalMessage(){
+		delete this;
+	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 };

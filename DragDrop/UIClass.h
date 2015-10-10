@@ -13,8 +13,10 @@ public:
 	void DragWindow();
 	void QuitApp();
 	void MinWindow();
-
+	virtual void OnFinalMessage(){
+		delete this;
+	};
 private:
-	WebView* ltskinview;
+	LTFrameView* ltskinview;
 	wchar_t* applicationpath;
 };

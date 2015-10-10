@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/css.css"/>
+	<script src="../javascript/jquery.min.js"></script>
+	<script src="../javascript/js.js"></script>
+	<style>
+	img{-webkit-user-drag:none}
+	a{-webkit-user-drag:none}
+	#div1{padding-left: 15px}
+	#div2{width: 500px;height: 300px;margin-left: 15px;margin-top: 10px;border-style: border: 1px solid #fff000;}
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		$(".windowclose").bind('mousedown',function() {
+			QuitApp();
+		});
+		$("#getdouban").bind('click',function(){
+		
+		     $('#div2').text('载入中......');
+	 		jQuery.ajax({
+	            type: "get",
+	            url:'https://api.douban.com/v2/book/1220562',
+	            dataType: 'json',
+	            success: function (data) {
+	                 $('#div2').text(JSON.stringify(data));
+	            },
+	            error: function () {
+	                $('#div2').text('请求失败');
+	            }
+	        });
+
+				
+		});
+	})
+	
+	</script>	
+</head>
+<body>
+<div id="windowbar">
+	<span>LTFrame实例教程-跨域请求ajax</span>
+	<div class="windowclose"><img src="../images/close.png"></div>
+</div>
+	<div id="div1"><input id="getdouban" type="button" value="获取douban图书信息"/></div>
+	<div id="div2"></div>
+</body>
+</body>
+</html>

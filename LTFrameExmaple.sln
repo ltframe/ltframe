@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LTFrameExmaple", "LTFrameExmaple\LTFrameExmaple.vcproj", "{65BA822D-4845-46DC-985A-B0E728258149}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{9F1EC664-E651-4B6F-AF24-6B6E5CF23E9A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MemoryManager", "MemoryManager\MemoryManager.vcproj", "{9CCCAAAA-2AB4-4CDC-88E2-5C5C33715993}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Plugin", "Plugin\Plugin.vcproj", "{A6971BDF-5047-4875-986F-EFC05ACA0E52}"
@@ -26,6 +24,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ipad", "Ipad\Ipad.vcproj", "{EE17A674-F7BB-42E0-A3B0-5D644A58282D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcproj", "{D1093081-D307-4648-A774-347C106A9DCB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrossDomain", "CrossDomain\CrossDomain.vcproj", "{907D0499-ABA9-4856-AF1B-058BAF19CC83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +81,10 @@ Global
 		{D1093081-D307-4648-A774-347C106A9DCB}.Debug|Win32.Build.0 = Debug|Win32
 		{D1093081-D307-4648-A774-347C106A9DCB}.Release|Win32.ActiveCfg = Release|Win32
 		{D1093081-D307-4648-A774-347C106A9DCB}.Release|Win32.Build.0 = Release|Win32
+		{907D0499-ABA9-4856-AF1B-058BAF19CC83}.Debug|Win32.ActiveCfg = Debug|Win32
+		{907D0499-ABA9-4856-AF1B-058BAF19CC83}.Debug|Win32.Build.0 = Debug|Win32
+		{907D0499-ABA9-4856-AF1B-058BAF19CC83}.Release|Win32.ActiveCfg = Release|Win32
+		{907D0499-ABA9-4856-AF1B-058BAF19CC83}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
