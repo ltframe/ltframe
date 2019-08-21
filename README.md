@@ -18,27 +18,28 @@ The use of LTFrame is totally free and you can use it in any application.
 	
 <img src="http://www.ltplayer.com/images/ltmd/c.jpg"/>
 </div>
+<br>
 <div align=center>
 	
 <img src="http://www.ltplayer.com/images/ltmd/c1.jpg"/>
-</div>
+</div><br>
 <div align=center>
 	
 <img src="http://www.ltplayer.com/images/ltmd/canvas.jpg"/>
-</div>
+</div><br>
 <div align=center>
 	
 <img src="http://www.ltplayer.com/images/ltmd/google.jpg"/>
-</div>
+</div><br>
 <div align=center>
 	
 <img src="http://www.ltplayer.com/images/ltmd/m.jpg"/>
-</div>
+</div><br>
 <div align=center>
 	
 <img src="http://www.ltplayer.com/images/ltmd/qqgif.gif"/>
-</div>
+</div><br>
 <div align=center>
 	
 <img src="http://www.ltplayer.com/images/ltmd/p.jpg"/>
-</div>
+</div><br>
