@@ -1,6 +1,6 @@
 # ltframe  -- webkit desktop applaction framework,use HTML,CSS,javascript
 
-
+[Englist][1]|[简体中文][2]
 
 LTFrame is a Windows application development framework .it based on the WebKit, you can use HTML,CSS, JavaScript.The web page development technology to develop your applications , you also can use HTML5, CSS3
 
@@ -63,3 +63,5 @@ The use of LTFrame is totally free and you can use it in any application.
 </div><br>
 
 
+  [1]: https://github.com/ltframe/ltframe/blob/master/README_EN.md
+  [2]: https://github.com/ltframe/ltframe
