@@ -1,36 +1,36 @@
-# ltframe  -- webkit desktop applaction framework,use HTML,CSS,javascript
+# ltframe  -- 使用HTML,CSS,javascript开发基于webkit的桌面应用程序框架
 
 [Englist][1]|[简体中文][2]
 
-LTFrame is a Windows application development framework .it based on the WebKit, you can use HTML,CSS, JavaScript.The web page development technology to develop your applications , you also can use HTML5, CSS3
+LTFrame是一个windows应用程序开发框架，它基于Webkit开发而成，你可以使用 HTML,CSS, JavaScript,来可以你的桌面应用程序
 
-LTFrame using the standard WIN32, SDK C++ , without MFC
+LTFrame 使用了标准win32,SDK，使用C++语言开发而成，不依赖于MFC
 
-LTFrame runs in the Windows2000 or higher operating system
+LTFrame开发成程序可以运行几乎所有的windows操作系统上
 
-You can use the VS2005, VS2008, or higher version of the VS for the application development
+你可以是在VS2005,2008或者更高版本的VS上去开发你的应用程序
 
-The use of LTFrame is totally free and you can use it in any application.
-
-
-----------
-
-## source compile
-
-**If you want to compile ltframe with source code, follow these steps**
-
- 1. install cygwin in your C:\
- 2. Use Vs2008 Open LTFRAME_SRC\Source\WebKit\win\WebKit.vcproj\WebKit.sln
-
-**If you just want to use ltframe, follow these steps**
-
-1. install cygwin in your C:\
-2. Use Vs2008 Open LTFrameExmaple.sln
+LTFrame的使用是完全免费的，您可以在任何应用程序中使用它
 
 
 ----------
 
-## Preview
+## 源码编译
+
+**如果你想要编译源码的话，请执行一下步骤：**
+
+ 1. 安装 cygwin 去 C:\
+ 2. 使用 Vs2008 或更高版本的VS打开 LTFRAME_SRC\Source\WebKit\win\WebKit.vcproj\WebKit.sln
+
+**如果你只想要使用LTFrame的话，请执行一下步骤：**
+
+1. 安装 cygwin 去 C:\
+2. 使用 Vs2008 或更高版本的VS打开 LTFrameExmaple.sln
+
+
+----------
+
+## 开发实例预览
 
 <div align=center>
 	
