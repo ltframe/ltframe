@@ -12,7 +12,7 @@ You can use the VS2005, VS2008, or higher version of the VS for the application 
 
 The use of LTFrame is totally free and you can use it in any application.
 
-
+.about more:[www.ltplayer.com][3]
 ----------
 
 ## source compile
@@ -65,3 +65,4 @@ The use of LTFrame is totally free and you can use it in any application.
 
   [1]: https://github.com/ltframe/ltframe/blob/master/README_EN.md
   [2]: https://github.com/ltframe/ltframe
+  [3]: http://www.ltplayer.com

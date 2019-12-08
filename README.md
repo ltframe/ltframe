@@ -12,7 +12,7 @@ LTFrame开发成程序可以运行几乎所有的windows操作系统上
 
 LTFrame的使用是完全免费的，您可以在任何应用程序中使用它
 
-
+关于更多信息请访问官方网站:[www.ltplayer.com][3]
 ----------
 
 ## 源码编译
@@ -65,3 +65,4 @@ LTFrame的使用是完全免费的，您可以在任何应用程序中使用它
 
   [1]: https://github.com/ltframe/ltframe/blob/master/README_EN.md
   [2]: https://github.com/ltframe/ltframe
+  [3]: http://www.ltplayer.com
