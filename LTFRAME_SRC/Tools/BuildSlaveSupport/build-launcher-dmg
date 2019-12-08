@@ -1,0 +1,287 @@
+#!/usr/bin/perl -w
+
+# Copyright (C) 2006, 2007, 2008, 2009 Apple Inc.  All rights reserved.
+# Copyright (C) 2006 Mark Rowe <opendarwin.org@bdash.net.nz>.  All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1.  Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer. 
+# 2.  Redistributions in binary form must reproduce the above copyright
+#     notice, this list of conditions and the following disclaimer in the
+#     documentation and/or other materials provided with the distribution. 
+# 3.  Neither the name of Apple Inc. ("Apple") nor the names of
+#     its contributors may be used to endorse or promote products derived
+#     from this software without specific prior written permission. 
+#
+# THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+# EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+# THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Script used by build slaves to create a disk-image containing WebKit.app.
+
+use strict;
+
+use Cwd 'realpath';
+use File::Basename;
+use File::Glob ':globally';
+use FindBin;
+use Getopt::Long;
+use URI::Escape;
+
+use lib "$FindBin::Bin/../Scripts";
+use webkitdirs;
+use VCSUtils;
+
+my $TMPDIR = `getconf DARWIN_USER_TEMP_DIR`;
+chomp $TMPDIR;
+
+my $branch;
+my $leopardProductDir;
+my $nightlyBuild = 0;
+my $productDir;
+my $revision;
+my $snowLeopardProductDir;
+my $tigerProductDir;
+my $uploadTo;
+GetOptions('upload-to-host=s' => \$uploadTo,
+           'upload-as-nightly!' => \$nightlyBuild,
+           'branch=s' => \$branch,
+           'revision=i' => \$revision,
+           'build-dir=s' => \$productDir,
+           'build-dir-10-4=s' => \$tigerProductDir,
+           'build-dir-10-5=s' => \$leopardProductDir,
+           'build-dir-10-6=s' => \$snowLeopardProductDir);
+
+$branch = currentBranch() unless defined($branch);
+$revision = currentSVNRevision() unless defined($revision);
+
+setBaseProductDir($productDir);
+
+my $configuration = $ENV{'RC_JASPER'} eq 'YES' ? '' : configuration();
+
+my $nightlyLauncherStagingPath = $productDir . "/WebKit.app";
+my $nightlyLauncherDiskImagePath = $productDir . "/WebKit-SVN-r$revision.dmg";
+my $nightlySymbolArchivePath;
+
+my $nightlyRemoteHost = 'rsync://nightly@builds.nightly.webkit.org';
+my $nightlyAdminHost = 'http://admin:admin@nightly.webkit.org';
+
+my @deltaUpdates;
+my $deltaUpdatePath = "$productDir/WebKit-SVN-r$revision";
+
+my @mountedPaths;
+END {
+    foreach my $path (@mountedPaths) {
+        `hdiutil detach $path 2>&1`;
+    }
+}
+
+sub buildDiskImage
+{
+    print "Removing previous temp source directory (if any)...\n";
+    `rm -rf /tmp/WebKitNightly`;
+    die "Removing previous temp source directory failed" if $?;
+
+    print "Making a new temp source directory...\n";
+    `mkdir /tmp/WebKitNightly`;
+    die "Making a new temp source directory failed" if $?;
+
+    print "Copying WebKit.app to temp source directory...\n";
+    `cp -R \"$nightlyLauncherStagingPath\" /tmp/WebKitNightly/WebKit.app`;
+    die "Copying WebKit.app to temp source directory failed" if $?;
+
+    print "Creating disk image...\n";
+    `hdiutil create \"$nightlyLauncherDiskImagePath\" -ov -srcfolder /tmp/WebKitNightly -fs HFS+ -volname \"WebKit\"`;
+    die "Creating disk image failed" if $?;
+
+    print "Removing temp source directory...\n";
+    `rm -rf /tmp/WebKitNightly`;
+    die "Removing temp source directory failed" if $?;
+
+    print "Compressing disk image...\n";
+    system("mv", "-f", $nightlyLauncherDiskImagePath, "$nightlyLauncherDiskImagePath.uncompressed.dmg") == 0 or die "Renaming disk image failed";
+    system("hdiutil", "convert", "-quiet", "$nightlyLauncherDiskImagePath.uncompressed.dmg", "-format", "UDBZ", "-imagekey", "zlib-level=9", "-o", "$nightlyLauncherDiskImagePath");
+    die "Compressing disk image failed" if $?;
+
+    unlink "$nightlyLauncherDiskImagePath.uncompressed.dmg";
+}
+
+sub buildSymbolArchive
+{
+    my $symbolDir = "$productDir/Symbols";
+    my $tigerSymbolDir = "$symbolDir/10.4";
+    my $leopardSymbolDir = "$symbolDir/10.5";
+    my $snowLeopardSymbolDir = "$symbolDir/10.6";
+
+    print "Removing previous symbol directory (if any)...\n";
+    `rm -rf \"$symbolDir\"`;
+    die "Removing previous symbol directory failed" if $?;
+
+    print "Making a new symbol directory...\n";
+    `mkdir -p \"$symbolDir\" \"$tigerSymbolDir\" \"$leopardSymbolDir\" \"$snowLeopardSymbolDir\"`;
+    die "Making a new symbol directory failed" if $?;
+
+    my %allPlatformsInfo = ("tiger" => {"symbols" => $tigerSymbolDir, "products" => $tigerProductDir},
+                            "leopard" => {"symbols" => $leopardSymbolDir, "products" => $leopardProductDir},
+                            "snowleopard" => {"symbols" => $snowLeopardSymbolDir, "products" => $snowLeopardProductDir}
+                            );
+
+    foreach my $platform (qw(tiger leopard snowleopard)) {
+        my $platformInfo = $allPlatformsInfo{$platform};
+        my $platformProductDir = $platformInfo->{"products"};
+        my $platformSymbolDir = $platformInfo->{"symbols"};
+
+        my @dsyms = <$platformProductDir\/$configuration\/*.dSYM>;
+        my @binaries = map { $a = $_; $a =~ s/\.dSYM//g; $a } @dsyms;
+
+        my $platformName = ucfirst($platform);
+        print "Copying $platformName symbols into symbol directory...";
+        foreach my $file (@dsyms, @binaries) {
+            my $name = basename($file);
+            `ditto --nocache $file \"$platformSymbolDir\"/$name`;
+            die "\nCopying $platformName symbols into symbol directory failed" if $?;
+            print ".";
+        }
+        print "\n";
+    }
+
+    $nightlySymbolArchivePath = "$productDir/WebKit-r$revision-symbols.zip";
+    print "Creating symbol archive...\n";
+    `ditto --nocache -c -k $symbolDir $nightlySymbolArchivePath`;
+    die "Creating symbol archive failed" if $?;
+}
+
+sub buildDeltas
+{
+    my $branch = shift(@_);
+
+    print "Building deltas...\n";
+    open BUILDS, "curl --silent 'http://nightly.webkit.org/builds/trunk/mac/all' |";
+
+    my $mountPoint = "${TMPDIR}WebKit-SVN-r$revision";
+    `hdiutil attach -mountpoint '$mountPoint' -noautoopen -noverify '$nightlyLauncherDiskImagePath'`;
+    push @mountedPaths, $mountPoint;
+
+    my @olderBuilds;
+    while (<BUILDS>) {
+        chomp;
+        my ($buildRevision, $buildTimestamp, $buildURL) = split(/,/);
+        if ($buildRevision < $revision) {
+            push @olderBuilds, +{ "revision" => $buildRevision, "url" => $buildURL };
+        }
+    }
+    close BUILDS;
+
+    mkdir $deltaUpdatePath;
+    for (my $i = 0; $i < 5; $i++) {
+        my $build = $olderBuilds[$i];
+        my $buildRevision = $build->{"revision"};
+        my $buildURL = $build->{"url"};
+        my $buildMountPoint = "${TMPDIR}WebKit-SVN-r$buildRevision";
+        my $buildPath = "$buildMountPoint.dmg";
+
+        my $patchPath = $deltaUpdatePath . "/WebKit-r$buildRevision-to-r$revision.delta";
+
+        print "Generating delta from r$buildRevision to r$revision...\n";
+
+        unlink $buildPath;
+        system "curl --silent -L -o '$buildPath' '$buildURL'";
+        die "Failed to download build." if $?;
+        `hdiutil attach -mountpoint '$buildMountPoint' -noautoopen -noverify -nobrowse '$buildPath'`;
+        die "Failed to mount build." if $?;
+        push @mountedPaths, $buildMountPoint;
+
+        system "$productDir/BinaryDelta", "create", "$buildMountPoint/WebKit.app", "$mountPoint/WebKit.app", $patchPath;
+        die "Failed to create delta" if $?;
+
+        push @deltaUpdates, +{ "revision" => $buildRevision, "file" => $patchPath };
+
+        `hdiutil detach '$buildMountPoint'`;
+        die "Failed to unmount build." if $?;
+    }
+
+    `hdiutil detach '$mountPoint'`;
+    die "Failed to unmount build." if $?;
+}
+
+sub signFile
+{
+    my $fileName = shift;
+    my $keyFile = "$ENV{HOME}/.nightly.webkit.org/nightly.webkit.org.private.pem";
+    my $signature = `openssl dgst -sha1 -binary < "$fileName" | openssl dgst -dss1 -sign "$keyFile" | openssl enc -base64`;
+    chomp($signature);
+    return $signature;
+}
+
+sub escapeSignatureForURL
+{
+    my $signature = shift;
+    $signature =~ s/(.)/sprintf("%X",ord($1))/eg;
+    return $signature;
+}
+
+sub uploadNightlyBuild
+{
+    my $branch = shift(@_);
+    my $fileName = basename($nightlyLauncherDiskImagePath);
+    my $nightlyRemoteDiskImagePath = "webkit-builds/files/$branch/mac/" . $fileName;
+
+    my $signature = escapeSignatureForURL(signFile($nightlyLauncherDiskImagePath));
+    system("rsync", "--password-file=$ENV{HOME}/.nightly.webkit.org/rsync-password", "-vP", $nightlyLauncherDiskImagePath, "$nightlyRemoteHost/$nightlyRemoteDiskImagePath") == 0 or die "Failed uploading disk image";
+    system("curl", "-H", "Accept: text/plain", "$nightlyAdminHost/admin/register-build/$branch/mac/$revision/$fileName?signature=$signature") == 0 or die "Failed to register build";
+
+    my $nightlyRemoteDeltaPath = "webkit-builds/files/$branch/mac/";
+    system("rsync", "--password-file=$ENV{HOME}/.nightly.webkit.org/rsync-password", "-rvP", $deltaUpdatePath, "$nightlyRemoteHost/$nightlyRemoteDeltaPath") == 0 or die "Failed uploading deltas";
+    foreach my $delta (@deltaUpdates) {
+        my $deltaFrom = $delta->{"revision"};
+        $fileName = basename($deltaUpdatePath) . "/" . basename($delta->{"file"});
+        $signature = escapeSignatureForURL(signFile($delta->{"file"}));
+        system("curl", "-H", "Accept: text/plain", "$nightlyAdminHost/admin/register-delta-update/$branch/mac/$deltaFrom/$revision/$fileName?signature=$signature") == 0 or die "Failed to register delta update";
+    }
+}
+
+sub uploadNightlySymbolArchive
+{
+    my $branch = shift(@_);
+    my $fileName = basename($nightlySymbolArchivePath);
+    my $nightlyRemoteSymbolArchivePath = "webkit-builds/symbols/$branch/mac/" . $fileName;
+
+    system("rsync", "--password-file=$ENV{HOME}/.nightly.webkit.org/rsync-password", "-vP", $nightlySymbolArchivePath, "$nightlyRemoteHost/$nightlyRemoteSymbolArchivePath") == 0 or die "Failed uploading symbol archive";
+#    system("curl", "-H", "Host: nightly.webkit.org", "-H", "Accept: text/plain", "$nightlyAdminHost/admin/register-symbols/$branch/mac/$revision/$fileName") == 0 or die "Failed to register symbols";
+}
+
+sub purgeNightlyCache
+{
+    system("curl", "-H", "Host: nightly.webkit.org", "-H", "Accept: text/plain", "$nightlyAdminHost/admin/purge-cache") == 0 or die "Failed to purge cache";
+}
+
+sub uploadBuildSlaveDiskImage
+{
+    my $remoteDiskImagePath = shift(@_) . basename($nightlyLauncherDiskImagePath);
+    system("rsync", "-vP", $nightlyLauncherDiskImagePath, $remoteDiskImagePath) == 0 or die "Failed uploading disk image";
+}
+
+chdirWebKit();
+buildDiskImage($branch);
+# buildSymbolArchive($branch);
+
+if ($nightlyBuild) {
+    buildDeltas($branch);
+    uploadNightlyBuild($branch);
+    # uploadNightlySymbolArchive($branch);
+    purgeNightlyCache();
+} elsif ($uploadTo) {
+    uploadBuildSlaveDiskImage($uploadTo);
+} else {
+    print "Disk image left at $nightlyLauncherDiskImagePath\n";
+}
