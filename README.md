@@ -13,6 +13,23 @@ You can use the VS2005, VS2008, or higher version of the VS for the application 
 The use of LTFrame is totally free and you can use it in any application.
 
 
+----------
+
+##**source compile**
+
+**If you want to compile ltframe with source code, follow these steps**
+
+ 1. install cygwin in your C:\
+ 2. Use Vs2008 Open LTFRAME_SRC\Source\WebKit\win\WebKit.vcproj\WebKit.sln
+
+**If you just want to use ltframe, follow these steps**
+
+1. install cygwin in your C:\
+2. Use Vs2008 Open LTFrameExmaple.sln
+
+
+----------
+##**Preview**
 
 <div align=center>
 	
@@ -43,3 +60,5 @@ The use of LTFrame is totally free and you can use it in any application.
 	
 <img src="http://www.ltplayer.com/images/ltmd/p.jpg"/>
 </div><br>
+
+
