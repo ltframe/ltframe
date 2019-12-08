@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="WebCoreGenerated"
+	ProjectGUID="{0A324352-B3B6-496C-9E5B-4C7E923E628B}"
+	Keyword="MakeFileProj"
+	TargetFrameworkVersion="131072"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug_All|Win32"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\WebCoreGeneratedCommon.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; grep XX$(ProjectName)XX &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;if errorlevel 1 exit 1&#x0D;&#x0A;echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				ReBuildCommandLine="echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				CleanCommandLine="del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug_Cairo_CFLite|Win32"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\WebCoreGeneratedCommon.vsprops;.\WebCoreGeneratedCairo.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; grep XX$(ProjectName)XX &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;if errorlevel 1 exit 1&#x0D;&#x0A;echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; cairo&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(ConfigurationBuildDir)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cairo curl&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				ReBuildCommandLine="echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; cairo&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(ConfigurationBuildDir)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cairo curl&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				CleanCommandLine="del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\WebCoreGeneratedCommon.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; grep XX$(ProjectName)XX &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;if errorlevel 1 exit 1&#x0D;&#x0A;echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				ReBuildCommandLine="echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				CleanCommandLine="del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\WebCoreGeneratedCommon.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; grep XX$(ProjectName)XX &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;if errorlevel 1 exit 1&#x0D;&#x0A;echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				ReBuildCommandLine="echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				CleanCommandLine="del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Production|Win32"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\WebCoreGeneratedCommon.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; grep XX$(ProjectName)XX &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;if errorlevel 1 exit 1&#x0D;&#x0A;echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				ReBuildCommandLine="echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; windows&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(WebKitOutputDir)/$(ConfigurationName)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cg cf&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				CleanCommandLine="del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release_Cairo_CFLite|Win32"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\WebCoreGeneratedCommon.vsprops;.\WebCoreGeneratedCairo.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; grep XX$(ProjectName)XX &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;if errorlevel 1 exit 1&#x0D;&#x0A;echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; cairo&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(ConfigurationBuildDir)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cairo curl&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				ReBuildCommandLine="echo XX$(ProjectName)XX &gt; &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(ConfigurationBuildDir)&#x0D;&#x0A;bash build-generated-files.sh &quot;$(ConfigurationBuildDir)&quot; &quot;$(WebKitLibrariesDir)&quot; &quot;$(WebKitVSPropsRedirectionDir)..\..\..\WebKitLibraries\win&quot; cairo&#x0D;&#x0A;bash migrate-scripts.sh &quot;$(ConfigurationBuildDir)/obj/WebCore/scripts&quot;&#x0D;&#x0A;cmd /C copyForwardingHeaders.cmd cairo curl&#x0D;&#x0A;cmd /C copyWebCoreResourceFiles.cmd&#x0D;&#x0A;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				CleanCommandLine="del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\DerivedSources&quot;&#x0D;&#x0A;del /s /q &quot;$(ConfigurationBuildDir)\obj\WebCore\scripts&quot;&#x0D;&#x0A;if exist &quot;$(ConfigurationBuildDir)\buildfailed&quot; del &quot;$(ConfigurationBuildDir)\buildfailed&quot;&#x0D;&#x0A;"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<File
+			RelativePath=".\build-generated-files.sh"
+			>
+		</File>
+		<File
+			RelativePath=".\copyForwardingHeaders.cmd"
+			>
+		</File>
+		<File
+			RelativePath=".\copyWebCoreResourceFiles.cmd"
+			>
+		</File>
+		<File
+			RelativePath="..\DerivedSources.make"
+			>
+		</File>
+		<File
+			RelativePath=".\migrate-scripts.sh"
+			>
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
