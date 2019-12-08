@@ -15,7 +15,7 @@ The use of LTFrame is totally free and you can use it in any application.
 
 ----------
 
-##source compile
+## source compile
 
 **If you want to compile ltframe with source code, follow these steps**
 
@@ -29,7 +29,8 @@ The use of LTFrame is totally free and you can use it in any application.
 
 
 ----------
-##Preview
+
+## Preview
 
 <div align=center>
 	
